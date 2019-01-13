@@ -35,7 +35,7 @@ public class MainActivity extends Activity {
     }
 
     public void start2(View v) {
-        mRandomTextView.setText("912111");
+        mRandomTextView.setText("912");
         pianyiliang[0] = 7;
         pianyiliang[1] = 6;
         pianyiliang[2] = 12;
@@ -49,7 +49,7 @@ public class MainActivity extends Activity {
     }
 
     public void start3(View v) {
-        mRandomTextView.setText("9078111123");
+        mRandomTextView.setText("9078111123sdasda.sdf");
         mRandomTextView.setPianyilian(RandomTextView.FIRSTF_LAST);
         mRandomTextView.start();
 

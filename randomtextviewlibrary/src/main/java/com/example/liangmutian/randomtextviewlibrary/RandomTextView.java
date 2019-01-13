@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by lmt on 16/11/1.
@@ -29,7 +30,7 @@ public class RandomTextView extends TextView {
     private int pianyiliangTpye;
 
     //   滚动总行数 可设置
-    private int maxLine = 10;
+    private int maxLine = 30;
     //   当前字符串长度
     private int numLength = 0;
     //   当前text
@@ -42,7 +43,6 @@ public class RandomTextView extends TextView {
     private int[] pianyiliangSum;
     //滚动完成判断
     private int[] overLine;
-
     private Paint p;
     //第一次绘制
     private boolean firstIn = true;
@@ -148,13 +148,8 @@ public class RandomTextView extends TextView {
     private void drawNumber(Canvas canvas) {
 
         for (int j = 0; j < numLength; j++) {
-
             for (int i = 1; i < maxLine; i++) {
-
-
-                if (i == maxLine - 1 && i * baseline + pianyiliangSum[j] <= baseline)
-
-                {
+                if (i == maxLine - 1 && i * baseline + pianyiliangSum[j] <= baseline) {
                     pianyilianglist[j] = 0;
                     overLine[j] = 1;
                     int auto = 0;
@@ -171,24 +166,34 @@ public class RandomTextView extends TextView {
                     }
 
                 }
-                if (overLine[j] == 0)
-
+                if (overLine[j] == 0){
+                    if(arrayListText.get(j) == -1){
+                        String chars = text.toString();
+                        drawText(canvas, chars.charAt(j) + "", 0 + f0 * j,
+                                baseline, p);
+                    }else{
                     drawText(canvas, setBack(arrayListText.get(j), maxLine - i - 1) + "", 0 + f0 * j,
                             i * baseline + pianyiliangSum[j], p);
+                    }
 
                     //canvas.drawText(setBack(arrayListText.get(j), maxLine - i - 1) + "", 0 + f0 * j,
                     //        i * baseline + pianyiliangSum[j], p);
 
-                else {
+                } else {
                     //定位后画一次就好啦
                     if (overLine[j] == 1) {
                         overLine[j]++;
-
-                        drawText(canvas, arrayListText.get(j) + "", 0 + f0 * j,
+                        String chars = text.toString();
+                        drawText(canvas, chars.charAt(j) + "", 0 + f0 * j,
                                 baseline, p);
                         // canvas.drawText(arrayListText.get(j) + "", 0 + f0 * j,
                         //        baseline, p);
                     }
+//                    else{
+                        String chars = text.toString();
+//                        drawText(canvas, chars.charAt(i) + "", 0 + f0 * j,
+//                                baseline, p);
+//                    }
 
                     //break;
                 }
@@ -199,6 +204,9 @@ public class RandomTextView extends TextView {
 
         }
     }
+
+
+
 
     //设置上方数字0-9递减
     private int setBack(int c, int back) {
@@ -235,13 +243,11 @@ public class RandomTextView extends TextView {
     private ArrayList<Integer> getList(String s) {
 
         ArrayList<Integer> arrayList = new ArrayList<Integer>();
-
         for (int i = 0; i < s.length(); i++) {
-
             String ss = s.substring(i, i + 1);
 
-            int a = Integer.parseInt(ss);
-
+            String numer = ss.replaceAll("[^(0-9)]", "-1");
+            int a = Integer.parseInt(numer);
             arrayList.add(a);
         }
         return arrayList;
