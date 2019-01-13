@@ -1,4 +1,6 @@
 
+在此基础上增加了支持字母和符号 , 不过暂时只支持默认模式 , 不支持自定义模式
+
 转载请注明作者AndroidMsky及原文链接
 
 http://blog.csdn.net/androidmsky/article/details/53009886
